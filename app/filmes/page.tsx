@@ -1,4 +1,24 @@
 import Card from "@/components/Card"; // ajuste o caminho conforme seu projeto
+import BarraLateral from "@/components/BarraLateral";
+import Header from "@/components/Header";
+import Layout from "@/components/Layout";
+
+export default function testPage() {
+    return (
+        <>
+            <Layout pagina="Sessão de Filmes">
+                <div className="min-h-screen bg-neutral-900 p-10">
+                    <div className="flex flex-wrap gap-6">
+                        {avaliacoesMock.map((avaliacao) => (
+                        <Card key={avaliacao.id} {...avaliacao} />
+                        ))}
+                    </div>
+                </div>
+            </Layout>
+        </>
+    )
+}
+
 
 const avaliacoesMock = [
     {
@@ -6,7 +26,7 @@ const avaliacoesMock = [
         idAutor: 1,
         titulo: "Interestelar",
         genero: "Filme",
-        imagemUrl: "https://picsum.photos/seed/interestelar/400/300",
+        imagemUrl: "https://rollingstone.com.br/wp-content/uploads/2025/01/interestelar-de-christopher-nolan-reestreia-nos-cinemas-brasileiros.jpg",
         sinopse:
             "Um grupo de exploradores viaja através de um buraco de minhoca no espaço em busca de um novo lar para a humanidade.",
         resenha:
@@ -38,18 +58,3 @@ const avaliacoesMock = [
         recomendacao: true,
     },
 ];
-
-export default function TestePage() {
-    return (
-        <div className="min-h-screen bg-neutral-900 p-10">
-            <h1 className="text-white text-2xl font-bold mb-6">
-                Teste do componente Card
-            </h1>
-            <div className="flex flex-wrap gap-6">
-                {avaliacoesMock.map((avaliacao) => (
-                    <Card key={avaliacao.id} {...avaliacao} />
-                ))}
-            </div>
-        </div>
-    );
-}

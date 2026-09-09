@@ -12,7 +12,7 @@ export default function Layout({ pagina, children }: LayoutProps) {
             <BarraLateral />
             <div className="flex flex-col flex-1 overflow-hidden">
                 <Header pagina={pagina} />
-                <main className="flex-1 overflow-y-auto bg-[#353535]">
+                <main className="flex-1 overflow-y-auto bg-neutral-900">
                     {children}
                 </main>
             </div>

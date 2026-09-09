@@ -7,7 +7,7 @@ export default function testPage() {
     return (
         <>
             <Layout pagina="Sessão de Filmes">
-                <div className="min-h-screen bg-neutral-900 p-10">
+                <div className="min-h-screen p-10">
                     <div className="flex flex-wrap gap-6">
                         {avaliacoesMock.map((avaliacao) => (
                         <Card key={avaliacao.id} {...avaliacao} />

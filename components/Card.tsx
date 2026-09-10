@@ -21,6 +21,7 @@ export default function Card({
     imagemUrl,
     sinopse,
     resenha,
+    recomendacao,
     onExcluido,
 }: CardProps) {
     const { usuario } = useAuth();
@@ -66,7 +67,22 @@ export default function Card({
                 <div className="w-24 h-32 flex-shrink-0 relative">
                     <img src={imagemUrl} alt={titulo} className="w-full h-full object-cover" />
                 </div>
-                <p className="text-sm text-black/80 leading-snug">{sinopse}</p>
+                <div className="flex flex-col justify-between flex-1">
+                    <p className="text-sm text-black/80 leading-snug">
+                        {sinopse}
+                    </p>
+                    <div className="flex justify-end mt-2">
+                        {recomendacao ? (
+                            <span className="bg-green-500 rounded-xl text-xs border border-green-600 px-2 py-1 text-white">
+                                RECOMENDADO
+                            </span>
+                        ) : (
+                            <span className="bg-red-500 rounded-xl text-xs border border-red-600 px-2 py-1 text-white">
+                                NÃO RECOMENDADO
+                            </span>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );

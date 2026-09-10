@@ -27,7 +27,6 @@ export function useAvaliacoes(genero?: string) {
     useEffect(() => {
         carregar();
 
-        // atualiza a lista sozinho quando um post novo é criado em qualquer lugar da tela
         window.addEventListener("avaliacao-criada", carregar);
         return () => window.removeEventListener("avaliacao-criada", carregar);
     }, [carregar]);

@@ -8,7 +8,7 @@ interface ListaAvaliacoesProps {
 }
 
 export default function ListaAvaliacoes({ genero }: ListaAvaliacoesProps) {
-    const { avaliacoes, carregando, erro } = useAvaliacoes(genero);
+    const { avaliacoes, carregando, erro, recarregar } = useAvaliacoes(genero);
 
     if (carregando) return <p className="text-white/60">Carregando...</p>;
     if (erro) return <p className="text-red-400">{erro}</p>;
@@ -28,6 +28,7 @@ export default function ListaAvaliacoes({ genero }: ListaAvaliacoesProps) {
                     sinopse={a.sinopse}
                     resenha={a.resenha}
                     recomendacao={a.recomendacao}
+                    onExcluido={recarregar}
                 />
             ))}
         </div>

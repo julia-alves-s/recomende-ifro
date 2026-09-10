@@ -1,6 +1,6 @@
 export interface Avaliacao {
     id: number;
-    idAutor: number;
+    idAutor: string;
     titulo: string;
     genero: string;
     imagemUrl: string;
@@ -20,6 +20,5 @@ export async function buscarAvaliacoes(): Promise<Avaliacao[]> {
 
     const data = await res.json();
 
-    // aceita { dados: [...] } ou { data: [...] } ou array direto
     return data.dados ?? data.data ?? data;
 }

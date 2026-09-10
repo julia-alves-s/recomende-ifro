@@ -1,15 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useAuth } from "../src/context/AuthContext";
 
 interface CadastroFormProps {
     onSuccess?: () => void;
 }
 
 export default function CadastroForm({ onSuccess }: CadastroFormProps) {
+    const { setUsuario } = useAuth();
+
     const [nome, setNome] = useState("");
-    const [usuario, setUsuario] = useState("");
+    const [usuarioInput, setUsuarioInput] = useState("");
     const [senha, setSenha] = useState("");
+
     const [enviando, setEnviando] = useState(false);
     const [erroEnvio, setErroEnvio] = useState<string | null>(null);
 
@@ -19,19 +23,27 @@ export default function CadastroForm({ onSuccess }: CadastroFormProps) {
         setEnviando(true);
 
         try {
-            const res = await fetch("http://localhost:3333/usuarios/", {
+            const res = await fetch("http://localhost:3333/usuarios", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
-                body: JSON.stringify({ nome, usuario, senha }),
+                body: JSON.stringify({ nome, usuario: usuarioInput, senha }),
             });
 
             const data = await res.json().catch(() => null);
 
             if (!res.ok) {
-                setErroEnvio(data?.error ?? "Erro ao cadastrar usuário.");
+                setErroEnvio(data?.error ?? data?.mensagem ?? "Erro ao cadastrar usuário.");
                 return;
             }
+
+            // Cadastro já loga automaticamente (usuarioService.criar chama login por baixo)
+            const dadosUsuario = data.dados ?? data.data ?? data;
+            setUsuario({
+                id: dadosUsuario.id,
+                nome: dadosUsuario.nome,
+                usuario: dadosUsuario.usuario,
+            });
 
             onSuccess?.();
         } catch (err) {
@@ -59,8 +71,8 @@ export default function CadastroForm({ onSuccess }: CadastroFormProps) {
             <div className="flex flex-col gap-1">
                 <label className="text-sm">Usuário</label>
                 <input
-                    value={usuario}
-                    onChange={(e) => setUsuario(e.target.value)}
+                    value={usuarioInput}
+                    onChange={(e) => setUsuarioInput(e.target.value)}
                     required
                     className="border p-2 bg-transparent rounded-xl"
                 />

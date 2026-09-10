@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { useAuth } from "../src/context/AuthContext";
 
 interface LoginFormProps {
     onSuccess?: () => void;
 }
 
 export default function LoginForm({ onSuccess }: LoginFormProps) {
-    const [usuario, setUsuario] = useState("");
+    const { setUsuario } = useAuth();
+
+    const [usuarioInput, setUsuarioInput] = useState("");
     const [senha, setSenha] = useState("");
 
     const [enviando, setEnviando] = useState(false);
@@ -22,19 +25,23 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
             const res = await fetch("http://localhost:3333/usuarios/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: "include", // necessário pro cookie de sessão ser salvo
-                body: JSON.stringify({ usuario, senha }),
+                credentials: "include",
+                body: JSON.stringify({ usuario: usuarioInput, senha }),
             });
 
             const data = await res.json().catch(() => null);
 
             if (!res.ok) {
-                setErroEnvio(data?.error ?? "Usuário ou senha inválidos.");
+                setErroEnvio(data?.error ?? data?.mensagem ?? "Usuário ou senha inválidos.");
                 return;
             }
 
-            // Se a API retornar um token, salve aqui, ex:
-            // localStorage.setItem("token", data.token);
+            const dadosUsuario = data.dados ?? data.data ?? data;
+            setUsuario({
+                id: dadosUsuario.id,
+                nome: dadosUsuario.nome,
+                usuario: dadosUsuario.usuario,
+            });
 
             onSuccess?.();
         } catch (err) {
@@ -52,8 +59,8 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
             <div className="flex flex-col gap-1">
                 <label className="text-sm">Usuário</label>
                 <input
-                    value={usuario}
-                    onChange={(e) => setUsuario(e.target.value)}
+                    value={usuarioInput}
+                    onChange={(e) => setUsuarioInput(e.target.value)}
                     required
                     className="border p-2 bg-transparent rounded-xl"
                 />

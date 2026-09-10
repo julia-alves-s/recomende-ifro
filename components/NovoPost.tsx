@@ -60,7 +60,7 @@ export default function NovoPostForm({ onSuccess }: NovoPostFormProps) {
 
         setEnviando(true);
         try {
-            const res = await fetch("http://localhost:3333/avaliacoes", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/avaliacoes`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

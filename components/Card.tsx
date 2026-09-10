@@ -29,7 +29,7 @@ export default function Card({
     async function excluir() {
         if (!confirm("Excluir esta avaliação?")) return;
 
-        const res = await fetch(`http://localhost:3333/avaliacoes/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/avaliacoes/${id}`, {
             method: "DELETE",
             credentials: "include",
         });

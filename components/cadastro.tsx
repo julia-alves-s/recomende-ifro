@@ -23,7 +23,7 @@ export default function CadastroForm({ onSuccess }: CadastroFormProps) {
         setEnviando(true);
 
         try {
-            const res = await fetch("http://localhost:3333/usuarios", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/usuarios`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

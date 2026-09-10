@@ -9,8 +9,10 @@ export interface Avaliacao {
     recomendacao: boolean;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function buscarAvaliacoes(): Promise<Avaliacao[]> {
-    const res = await fetch("http://localhost:3333/avaliacoes", {
+    const res = await fetch(`${API_URL}/avaliacoes`, {
         credentials: "include",
     });
 

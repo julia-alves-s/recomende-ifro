@@ -22,7 +22,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
         setEnviando(true);
 
         try {
-            const res = await fetch("http://localhost:3333/usuarios/login", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/usuarios/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

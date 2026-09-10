@@ -1,13 +1,14 @@
 import BarraLateral from "@/components/BarraLateral";
 import Header from "@/components/Header";
 import Layout from "@/components/Layout";
+import ListaAvaliacoes from "@/components/ListaAvaliacoes";
 
-export default function testPage() {
+export default function seriePage() {
     return (
         <>
             <Layout pagina="Sessão de Séries">
-                <div>
-
+                <div className="m-10">
+                    <ListaAvaliacoes genero="serie" />
                 </div>
             </Layout>
         </>

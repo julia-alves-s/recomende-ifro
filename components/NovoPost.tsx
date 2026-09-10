@@ -63,6 +63,7 @@ export default function NovoPostForm({ onSuccess }: NovoPostFormProps) {
             const res = await fetch("http://localhost:3333/avaliacoes", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({
                     titulo,
                     genero,
@@ -78,6 +79,9 @@ export default function NovoPostForm({ onSuccess }: NovoPostFormProps) {
                 setErroEnvio(data?.error ?? "Erro ao publicar a avaliação.");
                 return;
             }
+
+            window.dispatchEvent(new Event("avaliacao-criada"))
+            onSuccess?.();  
 
             onSuccess?.();
         } finally {

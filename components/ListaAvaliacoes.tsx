@@ -38,10 +38,13 @@ export default function ListaAvaliacoes({ genero }: ListaAvaliacoesProps) {
 
     return (
         <>
-            <div style={{ position: "absolute", top: 0, left: "-9999px", visibility: "hidden", width: "448px", }} aria-hidden="true">
+            <div style={{ position: "absolute", top: 0, left: "-9999px", visibility: "hidden",}} aria-hidden="true">
                 {avaliacoes.map((a, index) => (
-                    <div key={a.id} ref={(el) => { refs.current[index] = el; }} className="w-full max-w-md">
-                        <Card
+                    <div
+                    key={a.id}
+                    ref={(el) => { refs.current[index] = el; }}
+                    className="w-full max-w-md [&_*]:!overflow-hidden">
+                         <Card
                             id={a.id}
                             idAutor={a.idAutor}
                             titulo={a.titulo}

@@ -8,7 +8,7 @@ interface ListaAvaliacoesProps {
     genero: string;
 }
 
-const NUM_COLUNAS = 3; // pode tornar responsivo depois, ver nota abaixo
+const NUM_COLUNAS = 3;
 
 export default function ListaAvaliacoes({ genero }: ListaAvaliacoesProps) {
     const { avaliacoes, carregando, erro, recarregar } = useAvaliacoes(genero);
@@ -38,8 +38,7 @@ export default function ListaAvaliacoes({ genero }: ListaAvaliacoesProps) {
 
     return (
         <>
-            <div style={{ position: "absolute", top: 0, left: "-9999px", visibility: "hidden" }} aria-hidden="true">
-            <div className="absolute opacity-0 pointer-events-none -z-10" aria-hidden="true">
+            <div style={{ position: "absolute", top: 0, left: "-9999px", visibility: "hidden", width: "448px", }} aria-hidden="true">
                 {avaliacoes.map((a, index) => (
                     <div key={a.id} ref={(el) => { refs.current[index] = el; }} className="w-full max-w-md">
                         <Card
@@ -52,10 +51,9 @@ export default function ListaAvaliacoes({ genero }: ListaAvaliacoesProps) {
                             resenha={a.resenha}
                             recomendacao={a.recomendacao}
                             onExcluido={recarregar}
-                            />
+                        />
                     </div>
                 ))}
-            </div>
             </div>
 
             {colunas && (

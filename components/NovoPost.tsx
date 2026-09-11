@@ -152,6 +152,7 @@ export default function NovoPostForm({ onSuccess }: NovoPostFormProps) {
                     onChange={(e) => setSinopse(e.target.value)}
                     required
                     rows={3}
+                    maxLength={500}
                     className="border p-2 bg-transparent resize-none rounded-xl scrollbar-custom"
                 />
             </div>
@@ -163,6 +164,7 @@ export default function NovoPostForm({ onSuccess }: NovoPostFormProps) {
                     onChange={(e) => setResenha(e.target.value)}
                     required
                     rows={3}
+                    maxLength={1500}
                     className="border p-2 bg-transparent resize-none rounded-xl scrollbar-custom"
                 />
             </div>

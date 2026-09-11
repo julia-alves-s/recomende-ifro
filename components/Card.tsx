@@ -59,7 +59,7 @@ export default function Card({
                 )}
             </div>
 
-            <div className="bg-white px-4 py-3">
+            <div className="bg-white px-4 py-3 max-h-40 overflow-y-auto scrollbar-custom">
                 <p className="text-black font-bold">{resenha}</p>
             </div>
 
